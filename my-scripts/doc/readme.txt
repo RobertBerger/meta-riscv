@@ -1,6 +1,6 @@
 1) create a new repo on github
 
-git clone
+git clone git@github.com:RobertBerger/meta-riscv.git
 
 2) add my-scripts dir
 
@@ -12,14 +12,11 @@ git add .
 
 git commit -m "first commit"
 
-git remote add origin git@github.com:RobertBerger/meta-riscv.git
-
 git push -u origin master
 
-3) use my repo
+3) backup my repo, so I can edit this file
 
-mv meta-openembedded meta-openembedded.ori
-git clone git@github.com:RobertBerger/meta-openembedded.git
+cp -r meta-riscv mets-riscv.ori
 
 4) add upstream
 
