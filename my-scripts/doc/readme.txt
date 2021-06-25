@@ -20,54 +20,80 @@ cp -r meta-riscv mets-riscv.ori
 
 4) add upstream
 
-cd meta-openembedded
+cd meta-riscv
 
-git remote add official-upstream git://git.openembedded.org/meta-openembedded
+git remote add official-upstream git://github.com/riscv/meta-riscv.git
 
 git fetch official-upstream
 
+warning: no common commits
+remote: Enumerating objects: 2617, done.
+remote: Counting objects: 100% (351/351), done.
+remote: Compressing objects: 100% (174/174), done.
+remote: Total 2617 (delta 180), reused 297 (delta 155), pack-reused 2266
+Receiving objects: 100% (2617/2617), 7.23 MiB | 4.02 MiB/s, done.
+Resolving deltas: 100% (1152/1152), done.
+From git://github.com/riscv/meta-riscv
+ * [new branch]      dunfell    -> official-upstream/dunfell
+ * [new branch]      gatesgarth -> official-upstream/gatesgarth
+ * [new branch]      hardknott  -> official-upstream/hardknott
+ * [new branch]      master     -> official-upstream/master
+ * [new branch]      sumo       -> official-upstream/sumo
+
 git branch -a
+
+* master
+  remotes/official-upstream/dunfell
+  remotes/official-upstream/gatesgarth
+  remotes/official-upstream/hardknott
+  remotes/official-upstream/master
+  remotes/official-upstream/sumo
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/master
 
 5) use specific upstream branch/commit and make own branch
 
 syntax: git fetch url-to-repo branchname:refs/remotes/origin/branchname
 
-git fetch git://git.openembedded.org/meta-openembedded warrior:refs/remotes/origin/warrior
+git fetch git://github.com/riscv/meta-riscv.git hardknott:refs/remotes/origin/hardknott
+
+From git://github.com/riscv/meta-riscv
+ * [new branch]      hardknott  -> origin/hardknott
+
+git branch -a
+* master
+  remotes/official-upstream/dunfell
+  remotes/official-upstream/gatesgarth
+  remotes/official-upstream/hardknott
+  remotes/official-upstream/master
+  remotes/official-upstream/sumo
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/hardknott
+  remotes/origin/master
 
 6) Update from upstream:
 git co master
 >> git remote -v
 
-official-upstream       git://git.yoctoproject.org/meta-virtualization (fetch)
-official-upstream       git://git.yoctoproject.org/meta-virtualization (push)
-origin  git@github.com:RobertBerger/meta-virtualization.git (fetch)
-origin  git@github.com:RobertBerger/meta-virtualization.git (push)
+official-upstream       git://github.com/riscv/meta-riscv.git (fetch)
+official-upstream       git://github.com/riscv/meta-riscv.git (push)
+origin  git@github.com:RobertBerger/meta-riscv.git (fetch)
+origin  git@github.com:RobertBerger/meta-riscv.git (push)
 
 >> git fetch official-upstream
-remote: Counting objects: 4043, done.
-remote: Compressing objects: 100% (1273/1273), done.
-remote: Total 4043 (delta 3130), reused 3632 (delta 2727)
-Receiving objects: 100% (4043/4043), 721.50 KiB | 402.00 KiB/s, done.
-Resolving deltas: 100% (3130/3130), completed with 502 local objects.
-From git://git.yoctoproject.org/meta-virtualization
-   62591d9..e758547  master     -> official-upstream/master
- + 2942327...a382678 master-next -> official-upstream/master-next  (forced update)
-   a3fa5ce..6a1f33c  morty      -> official-upstream/morty
+
 ---
 
 7) My own branch:
+
 git co master
-git co official-upstream/warrior
-git checkout -b 2019-09-09-warrior-2.7+
+git co official-upstream/hardknott
+git checkout -b 2021-06-25-hardknott
 git co master
 cd my-scripts
 ./push-all-to-github.sh
 
 8) apply patches
-
-cd meta-virtualization
-
-git co 2019-09-09-warrior-2.7+ 
 
 stg init
 
@@ -79,7 +105,7 @@ import all patches
 
 ...
 
-stg series 
+stg series
 
 stg commit --all
 
